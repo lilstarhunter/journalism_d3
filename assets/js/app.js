@@ -1,68 +1,76 @@
-// //=======Start with SINGLE GRAPH =====//
-// //=========Create the SVG/Chart canvas=========//
-// //Define SVG area dimensions
-// var svgWidth = 900;
-// var svgHeight = 900;
+//=======Start with SINGLE GRAPH =====//
+//=========Define SVG Area and Margins=========//
+//Define SVG area dimensions
+var svgWidth = 500;
+var svgHeight = 500;
 
-// //Define chart's margins as an object
-// var chartMargin = {
-//     top: 30,
-//     right: 30,
-//     bottom: 30,
-//     left: 30,
-//   };
+//Define chart's margins as an object
+var chartMargin = {
+    top: 30,
+    right: 30,
+    bottom: 30,
+    left: 30,
+  };
 
-// // Define dimensions of the chart area
-// var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
-// var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+// Define dimensions of the chart area
+var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
+var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
-// // Select body, append SVG area to it, and set the dimensions
-// var svg = d3
-//   .select("body")
-//   .append("svg")
-//   .attr("height", svgHeight)
-//   .attr("width", svgWidth);
+// Append the SVG object to the body of the page
+var svg = d3
+  .select("#scatter")
+  .append("svg")
+  .attr("height", svgHeight)
+  .attr("width", svgWidth);
 
-// // Append a group to the SVG area and shift ('translate') it to the right and down to adhere
-// // to the margins set in the "chartMargin" object.
-// var chartGroup = svg
-// .append("g")
-// .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+// Append a chart group
+var chartGroup = svg
+    .append("g")
+    .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
-
-// //=========Create Axes=========//
-// // scale y to chart height
-// var yScale = d3.scaleLinear()
-//   .domain([0, d3.max(//Insert data//)])
-//   .range([chartHeight, 0]);
-
-// // scale x to chart width
-// var xScale = d3.scaleBand()
-//   .domain( //Insert data//)
-//   .range([0, chartWidth])
-//   .padding(0.05);
 
 //Load CSV data file into d3 object
 d3.csv("assets/data/data.csv").then(function(cenData){
-    console.log(cenData);
+    cenData.forEach(function (data) {
+        data.smokes = +data.smokes;
+        data.age = +data.age
+      });
 
-    // log a list of names
-    var state = cenData.map(data => data.abbr);
-    console.log("State", state);
     var smokes = []
-    var ages = []
-    // Grab data values of interest convert to numeric
-    cenData.forEach(function(data) {
-      var smokers = (data.smokes = +data.smokes);
-      smokes.push(smokers)
-      var age = data.age = +data.age
-      ages.push(age)
-    //   console.log("State:", data.abbr)
-    //   console.log("Percent Smokers:", smokes)
-    //   console.log("Average Age:", age)
-    });
+    var age = []
+    var state = []
+    for (i =0; i <cenData.length; i++){
+        smokes.push(cenData[i].smokes)
+        age.push(cenData[i].age)
+        state.push(cenData[i].abbr)
+      }
+    
+        //=========Create Axes=========//
+        // scale y to chart height
+        var yScale = d3.scaleLinear()
+            .domain([0, d3.max(smokes)])
+            .range([chartHeight, 0]);
+        svg.append("g").call(d3.axisLeft(yScale))
+        
+        // scale x to chart width
+        var xScale = d3.scaleLinear()
+        .domain([0, d3.max(age)])
+        .range([0, chartWidth])
+        .padding(0.05);
+        svg.append("g").call(d3.axisBottom(xScale))
+        
+        //Add dots
+        svg.append('g')
+        .selectAll("dot")
+        .data(cenData)
+        .classed("stateCircle", true)
+        .enter()
+        .append("circle")
+            .attr("cx", function (d,i) { return  xScale(d.age)})
+            .attr("cy", function (d,i) {return yScale(d.smokes)})
+            .attr("r", 5)
+        
+        });
+    
 
-    console.log(ages)
-  }).catch(function(error) {
-    console.log(error);
-  });
+
