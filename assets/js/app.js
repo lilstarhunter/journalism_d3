@@ -152,7 +152,7 @@ d3.csv("assets/data/data.csv")
       //x axis data
       data.age = +data.age;
       data.poverty = +data.poverty;
-      data.poverty = +data.income;
+      data.income = +data.income;
     });
     // console.log(cenData);
     //Create axes linear scale
