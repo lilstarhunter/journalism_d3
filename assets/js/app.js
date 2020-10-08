@@ -1,11 +1,11 @@
 //=========Define SVG Area and Margins=========//
 //Define SVG area dimensions
 var svgWidth = 800;
-var svgHeight = 500;
+var svgHeight = 600;
 
 //Define chart's margins as an object
 var margin = {
-  top: 60,
+  top: 10,
   right: 60,
   bottom: 60,
   left: 80,
@@ -163,7 +163,7 @@ d3.csv("assets/data/data.csv")
         d3.min(cenData, (d) => d.obesity) - 2,
         d3.max(cenData, (d) => d.obesity) + 2,
       ])
-      .range([height, 0]);
+      .range([height - 20, 0]);
 
     // Create initial axis functions
     var bottomAxis = d3.axisBottom(xLinearScale);
@@ -174,7 +174,7 @@ d3.csv("assets/data/data.csv")
     var xAxis = chartGroup
       .append("g")
       // .classed("x-axis", true)
-      .attr("transform", `translate(0, ${height})`)
+      .attr("transform", `translate(0, ${height - 20})`)
       .call(bottomAxis);
 
     // append y axis
@@ -193,7 +193,7 @@ d3.csv("assets/data/data.csv")
     //Create group labels for x-axis
     var labelsGroup = chartGroup
       .append("g")
-      .attr("transform", `translate(${width / 2}, ${height + 80})`)
+      .attr("transform", `translate(${width / 2}, ${height})`)
       .classed("aText", true);
 
     var ageLabel = labelsGroup
@@ -201,13 +201,15 @@ d3.csv("assets/data/data.csv")
       .attr("value", "age") // value to grab for event listener
       .classed("active", true)
       .attr("x", 0)
-      .attr("y", -30)
+      .attr("y", 10)
+      .attr("dx", "1em")
       .text("Age (Median)");
 
     var povertyLabel = labelsGroup
       .append("text")
       .attr("x", 0)
-      .attr("y", -10)
+      .attr("y", 30)
+      .attr("dx", "1em")
       .attr("value", "poverty") // value to grab for event listener
       .classed("inactive", true)
       .text("In Poverty (%)");
@@ -215,7 +217,8 @@ d3.csv("assets/data/data.csv")
     var incomeLabel = labelsGroup
       .append("text")
       .attr("x", 0)
-      .attr("y", 10)
+      .attr("y", 50)
+      .attr("dx", "1em")
       .attr("value", "income") // value to grab for event listener
       .classed("inactive", true)
       .text("Household Income (Median)");
@@ -250,7 +253,8 @@ d3.csv("assets/data/data.csv")
     //   .attr("value", "healthcare") // value to grab for event listener
     //   .classed("inactive", true)
     //   .text("Lacks Healthcare (%)");
-    // append y axis
+
+    // append y axis label
     chartGroup
       .append("text")
       .attr("transform", "rotate(-90)")
