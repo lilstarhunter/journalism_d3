@@ -243,7 +243,7 @@ d3.csv("assets/data/data.csv")
       .attr("value", "obesity") // value to grab for event listener
       .attr("transform", "rotate(-90)")
       .attr("x", -(height / 2))
-      .attr("y", -40)
+      .attr("y", -80)
       // .attr("dy", "1em")
       .classed("active", true)
       .text("Obese (%)");
@@ -260,7 +260,7 @@ d3.csv("assets/data/data.csv")
       .append("text")
       .attr("transform", "rotate(-90)")
       .attr("x", -(height / 2))
-      .attr("y", -80)
+      .attr("y", -40)
       // .attr("dy", "4em")
       .attr("value", "healthcare") // value to grab for event listener
       .classed("inactive", true)
