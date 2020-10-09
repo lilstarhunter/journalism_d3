@@ -116,11 +116,11 @@ function renderYText(circlesGroup, newYScale, chosenYAxis) {
 function updateToolTip(circlesGroup, chosenXAxis, chosenYAxis) {
   var xlabel = "";
   if (chosenXAxis === "age") {
-    label = "Age (Median)";
+    xlabel = "Age (Median)";
   } else if (chosenXAxis === "poverty") {
-    label = "In Poverty (%)";
+    xlabel = "In Poverty (%)";
   } else {
-    label = "Household Income (Median)";
+    xlabel = "Household Income (Median)";
   }
   var ylabel = "";
   if (chosenYAxis === "obesity") {
