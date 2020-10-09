@@ -135,8 +135,16 @@ function updateToolTip(circlesGroup, chosenXAxis, chosenYAxis) {
     .tip()
     .attr("class", "d3-tip")
     .offset([50, -75])
+    // .append("div")
+    .style("opacity", 0)
+    // .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
     .html(function (d) {
-      return `${d.state}(${d.abbr})<br>${xlabel}:  ${d[chosenXAxis]} <br> ${ylabel}:  ${d[chosenYAxis]}`;
+      return `<strong>${d.state}</strong><hr>${xlabel}:  ${d[chosenXAxis]} <br> ${ylabel}:  ${d[chosenYAxis]}`;
     });
 
   circlesGroup.call(toolTip);
