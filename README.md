@@ -11,22 +11,12 @@ The editor wants to run a series of feature stories about the health risks facin
 The data set included with the assignment is based on 2014 ACS 1-year estimates: [https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml](https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml)
 
 #### Interactive Scatter Chart Analysis 
-
-* Utilize d3 functionality to code graphic `app.js` to pull data from `data.csv` by using the `d3.csv` function
-
-![4-scatter](Images/4-scatter.jpg)
-
-* Include state abbreviations in the circles.
-
-* Create and situate your axes and labels to the left and bottom of the chart.
-
-* Visualizations can run using  `python -m http.server` to host the page at `localhost:8000` in your web browser.
-
-
-
 ![7-animated-scatter](Images/7-animated-scatter.gif)
 
-#### 1. Add Dynamics
+#### 1. Utilize d3 functionality 
+Code scatterplot graphic `app.js` to pull data from `data.csv` by using the `d3.csv` function. Includes the state abbreviations within the circles. Axes are classically situated to the left and bottom of the chart. Visualizations can run using  `python -m http.server` to host the page at `localhost:8000` in your web browser.
+
+#### 2. Add Dynamics
 
 Include user-interactivity to click axes label to compare key metrics being analyzed. 
 
